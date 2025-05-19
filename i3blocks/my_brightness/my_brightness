@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+brightness=$(brightnessctl | awk '/Current/ {print $3}')
+percent=$(brightnessctl | awk '/Current/ {print $4}' | sed 's/(//g' | sed 's/%)//g')
+
+
+# echo 󰛨 $percent
+
+if [ $((percent)) -lt 5 ]; then
+	echo "󱩎 $percent %"
+elif [ $((percent)) -lt 20 ]; then
+	echo "󱩏 $percent %" 
+elif [ $((percent)) -lt 40 ]; then
+	echo "󱩑 $percent %" 
+elif [ $((percent)) -lt 60 ]; then
+	echo "󱩓 $percent %" 
+elif [ $((percent)) -lt 80 ]; then
+	echo "󱩕 $percent %" 
+elif [ $((percent)) -lt 95 ]; then
+	echo "󱩖 $percent %" 
+else
+	echo "󰛨 $percent %" 
+fi
+
