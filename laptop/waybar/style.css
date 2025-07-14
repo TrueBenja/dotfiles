@@ -115,6 +115,8 @@ button:hover {
 #scratchpad,
 #power-profiles-daemon,
 #mpd,
+#power,
+#custom-power,
 #keyboard-state {
     padding: 0 10px;
     color: #ffffff;
@@ -126,6 +128,7 @@ button:hover {
 #workspaces {
     margin: 0 4px;
 }
+
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
