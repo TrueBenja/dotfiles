@@ -9,10 +9,10 @@ hl.monitor({
 
 -- Declaring variables
 
-local terminal = "alacritty"
+local terminal = "ghostty"
 local fileManager = "nautilus"
 local menu = "rofi -show drun"
-local browser = "google-chrome-stable"
+local browser = "firefox"
 local screenshot = "/home/benjamin/scripts/take_screenshot.sh"
 local fullScreenshot = "/home/benjamin/scripts/fullscreen_screenshot.sh"
 local copyScreenshot = "/home/benjamin/scripts/copy_screenshot.sh"
@@ -20,7 +20,7 @@ local copyScreenshot = "/home/benjamin/scripts/copy_screenshot.sh"
 -- Autostart
 
 hl.on("hyprland.start", function()
-	hl.exec_cmd("waybar & hyprpaper & nm-applet & hypridle  & /usr/lib/pam_kwallet_init")
+	hl.exec_cmd("waybar & hyprpaper & nm-applet & hypridle  & /usr/lib/pam_kwallet_init & ibus start --type wayland")
 end)
 
 -- Environment variables
@@ -31,6 +31,11 @@ hl.env("GDK_SCALE", "2")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+
+hl.env("GTK_IM_MODULE", "wayland")
+hl.env("XMODIFIERS", "@im=ibus")
+hl.env("QT_IM_MODULES", "wayland;ibus")
+hl.env("QT_IM_MODULE", "ibus")
 
 -- Configs
 
@@ -190,7 +195,7 @@ hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd("systemctl suspend"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("waybar &"))
 -- To kill waybar
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("pkill waybar"))
-hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen_state({ internal = 2, client = 0, action = "toggle" }))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
